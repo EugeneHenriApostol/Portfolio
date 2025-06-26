@@ -339,6 +339,14 @@ ul {
 }
 
 /* skills section */
+.skills-description {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xl);
+    max-width: 580px;
+    margin-right: auto;
+}
+
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
