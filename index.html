@@ -1,222 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      color: #0a0c10;
+      line-height: 1.55;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 72px;
+    }
+
+    /* ----- TYPOGRAPHY & UTILS ----- */
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      border-left: 4px solid #0a0c10;
+      padding-left: 0.9rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .text-muted {
+      color: #5b6e8c;
+      font-size: 0.9rem;
+    }
+
+    .divider-light {
+      height: 1px;
+      background: #eef2f6;
+      margin: 3rem 0;
+    }
+
+    /* ----- HERO SECTION (left/right) ----- */
+    .hero-grid {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #f0f2f5;
+      border: 2px solid #eef2f6;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-bio {
+      font-size: 1.15rem;
+      color: #2c3e50;
+      max-width: 620px;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .link-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .link-group a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #0a0c10;
+      border-bottom: 1.5px solid #cbd5e1;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .link-group a:hover {
+      border-bottom-color: #0a0c10;
+      color: #000;
+    }
+
+    /* ----- HALF-GRID: ABOUT + EDUCATION (side by side) ----- */
+    .double-column {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .double-column > div {
+      flex: 1 1 260px;
+    }
+
+    .info-card {
+      background: #fafcff;
+      border-radius: 24px;
+      padding: 0.2rem 0;
+    }
+
+    .edu-item {
+      margin-bottom: 1.6rem;
+    }
+
+    .edu-item strong {
+      font-size: 1rem;
+      font-weight: 650;
+      display: block;
+      letter-spacing: -0.2px;
+    }
+
+    .edu-meta {
+      font-size: 0.8rem;
+      color: #5b6e8c;
+      margin: 0.2rem 0 0.4rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .edu-desc {
+      font-size: 0.9rem;
+      color: #2d3a4b;
+      line-height: 1.45;
+    }
+
+    /* ----- EXPERIENCE section (subtle card style) ----- */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .exp-item {
+      border-left: 2px solid #e2e9f2;
+      padding-left: 1.2rem;
+      transition: border-left-color 0.2s;
+    }
+
+    .exp-item:hover {
+      border-left-color: #0a0c10;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-meta {
+      font-size: 0.8rem;
+      color: #5b6e8c;
+      margin-bottom: 0.5rem;
+      font-weight: 450;
+    }
+
+    /* ----- PROJECTS (clean grid style) ----- */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .project-card {
+      border-bottom: 1px solid #edf2f7;
+      padding-bottom: 1.2rem;
+    }
+
+    .project-name {
+      font-size: 1.1rem;
+      font-weight: 650;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .project-stack {
+      font-family: monospace;
+      font-size: 0.75rem;
+      background: #f1f5f9;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      color: #1e2a3a;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #cbd5e1;
+      color: #0a0c10;
+    }
+
+    /* ----- TECH STACK (chips) ----- */
+    .tech-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.75rem;
+    }
+
+    .tech-chip {
+      background: #f1f4f9;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 450;
+      color: #1f2a44;
+      transition: all 0.1s ease;
+    }
+
+    /* ----- CONTACT & FOOTER ----- */
+    .contact-line {
+      background: #fafcff;
+      padding: 1rem 0;
+      border-top: 1px solid #eef2f6;
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.75rem;
+      text-align: center;
+      color: #7d8eaa;
+      border-top: 1px solid #eef2f6;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 28px 20px 48px;
+      }
+      h1 {
+        font-size: 2.3rem;
+      }
+      .double-column {
+        gap: 2rem;
+      }
+      h2 {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="/">Portfolio</a>
-            </div>
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu-btn" aria-label="Toggle Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+<div class="container">
+  
+  <!-- HERO SECTION -->
+  <div class="hero-grid">
+    <img class="avatar" src="photo.jpg" alt="Eugene Henri Apostol" />
+    <div class="hero-content">
+      <h1>Hi, I'm Eugene Henri Apostol</h1>
+      <p class="hero-bio">
+        Software Engineer
+      </p>
+      <div class="link-group">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </div>
 
-    <div class="mobile-nav">
-        <ul>
-            <li><a href="#about" class="mobile-nav-link">About</a></li>
-            <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-        </ul>
+  <div class="divider-light"></div>
+
+  <!-- half layout -->
+  <div class="double-column">
+    <!-- LEFT: ABOUT -->
+    <div>
+      <h2>About</h2>
+      <div class="info-card">
+        <p style="color: #2d3e5f; line-height: 1.65;">
+          I'm a software engineer with hands-on experience building full-stack applications, backend systems, 
+          and AI-powered solutions. I’ve worked on enterprise platforms, including ERP systems and an 
+          Agentic RAG application, where I focused on API development, system integrations, and data processing workflows.
+        </p>
+        <p style="margin-top: 1rem; color: #3a546d;">
+          I enjoy programming on my freetime, working on backend architecture, designing APIs, and solving real-world problems through code,
+          and exploring new tools and technologies. I'm continuously improving my skills and fundamentals in system design, performance, and modern 
+          development practices while adapting to new tools and technologies.
+        </p>
+      </div>
     </div>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1>Hi, I'm <span class="highlight">Eugene Henri Apostol</span></h1>
-                        <p class="subtitle">AI & Web Developer</p>
-                        <br>
-                        <div class="hero-buttons">
-                            <a href="#contact" class="btn btn-primary">Contact Me</a>
-                            <a href="https://drive.google.com/file/d/1B5HHTaazzDPOSHbJTMKXDCbOzw4FHfr1/view?usp=drive_link" class="btn btn-outline" target="_blank">View Resume</a>
-                        </div>
-                    </div>
-                    <div class="hero-image">
-                        <div class="profile-image">
-                            <img src="img/picture.jpg" alt="Profile picture">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- RIGHT: EDUCATION -->
+    <div>
+      <h2>Education</h2>
+      <div class="info-card">
+        <div class="edu-item">
+          <strong>Bachelor of Science in Computer Science</strong>
+          <div class="edu-meta">University of San Jose-Recoletos • 2023 – 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <section id="about" class="about section">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                        A Bachelor of Science in Computer Science Graduate at the University of San Jose-Recoletos major in Artificial Intelligence and Web Development. 
-                        </p>
-                        <p>
-                            I build responsive and functional AI powered websites and web applications
-                        I am passionate in learning and I continuously explore new trends and advancements in the field of AI and Web Development
-                        </p>
-                        <p>I am a passionate and curious software developer who loves to build and explore the ever rapdily changing tech-field.
-                        </p>
-                    </div>
-                    <div class="about-cards">
-                        <div class="about-card">
-                            <h3>Education</h3>
-                            <p>Bachelor's Degree in Computer Science <br> University of San Jose-Recoletos, 2025</p>
-                        </div>
-                        <div class="about-card">
-                            <h3>Experience</h3>
-                            <p>Backend developer intern at Xpertis Solutions <br> February 2025 - May 2025</p>
-                        </div>
-                        <div class="about-card">
-                            <h3>Interest</h3>
-                            <p>Web Development, UI/UX Design, Data Analytics, Artificial Intelligence</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="divider-light"></div>
 
-        <section id="skills" class="skills section">
-            <div class="container">
-                <h2 class="section-title">Skills</h2>
-                <p class="skills-description">These are the skills I have acquired through my studies, internship, and personal projects</p>
-                <div class="skills-grid">
+  <!-- EXPERIENCE -->
+  <section style="margin-bottom: 3rem;">
+    <h2>Experience</h2>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-title">Junior Software Engineer (Full Stack)</div>
+        <div class="exp-meta">N-PAX CEBU CORPORATION • August 2025 – March 2026</div>
+        <p class="text-muted" style="margin-top: 0.2rem;">
+          Contributed to enterprise systems including an ERP Document Management System and an AI-powered RAG application. 
+          Developed backend services using ASP.NET Core and FastAPI, and built frontend modules using AngularJS. 
+          Implemented document retrieval pipelines with PostgreSQL and pgvector, handled API integrations, and resolved 
+          production issues in IoT systems to improve reliability and performance.
+        </p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-title">Backend Engineering Intern</div>
+        <div class="exp-meta">Xpertis Solutions • February 2025 – May 2025</div>
+        <p class="text-muted" style="margin-top: 0.2rem;">
+          Contributed to the development of an enrollment system using Laravel (PHP) and MySQL. 
+          Built RESTful APIs and backend logic, optimized database queries and indexing, and designed relational schemas. 
+          Led a small team of backend interns and supported core system features for academic workflows.
+        </p>
+      </div>
+    </div>
+  </section>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-html5"></i>
-                        </div>
-                        <h3>HTML</h3>
-                    </div>
+  <!-- PROJECTS-->
+  <section style="margin-bottom: 3rem;">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      
+      <!-- SpendWise -->
+      <div class="project-card">
+        <div class="project-name">
+          SpendWise — AI-Powered Personal Finance Tracker
+          <span class="project-stack">React · ASP.NET Core · FastAPI · Gemini AI · Docker</span>
+        </div>
+        <p class="text-muted" style="margin: 0.5rem 0 0.2rem;">
+          Full-stack expense management system with AI chatbot that provides personalized financial advice based on user transaction data. Features JWT authentication, soft deletes, real-time budget tracking, savings goals, and expense visualization charts. Containerized with Docker (4 services) and orchestrated with Docker Compose.
+        </p>
+        <ul style="margin: 0.5rem 0; padding-left: 1.2rem; color: #aaa; font-size: 0.85rem;">
+          <li>AI chatbot using Google Gemini analyzes spending patterns and gives actionable advice</li>
+          <li>RESTful API with repository pattern, dependency injection, and clean architecture</li>
+          <li>Real-time dashboard with Recharts visualization</li>
+          <li>Dockerized services: React frontend, .NET API, FastAPI AI service, SQL Server</li>
+        </ul>
+        <div style="margin-top: 0.8rem;">
+          <a href="#" class="project-link">live demo →</a>
+          <span style="margin: 0 0.8rem;">·</span>
+          <a href="#" class="project-link">github repo</a>
+          <span style="margin: 0 0.8rem;">·</span>
+          <a href="#" class="project-link">demo video</a>
+        </div>
+      </div>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-css3-alt"></i>
-                        </div>
-                        <h3>CSS</h3>
-                    </div>
+      <!-- more projects here -->
+      
+    </div>
+  </section>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-js"></i>
-                        </div>
-                        <h3>JavaScript</h3>
-                    </div>
+  <!-- TECH STACK (chip style) -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Tech Stack</h2>
+    <div class="tech-cloud">
+      <span class="tech-chip">JavaScript / TypeScript</span>
+      <span class="tech-chip">React & Next.js</span>
+      <span class="tech-chip">ASP.NET Core</span>
+      <span class="tech-chip">FastAPI</span>
+      <span class="tech-chip">Node.js</span>
+      <span class="tech-chip">PostgreSQL / SQLite</span>
+      <span class="tech-chip">MongoDB</span>
+      <span class="tech-chip">Docker</span>
+      <span class="tech-chip">Git / GitHub Actions</span>
+      <span class="tech-chip">Tailwind CSS</span>
+    </div>
+  </section>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-php"></i>
-                        </div>
-                        <h3>PHP</h3>
-                    </div>
+  <!-- footer -->
+  <div class="contact-line">
+    <h2 style="border-left: none; padding-left: 0; margin-bottom: 0.75rem;">Contact</h2>
+    <p style="margin-bottom: 0.3rem;">📧 eugenehenriapostol@gmail.com</p>
+    <p style="margin-bottom: 0;">📞 09926355273</p>
+  </div>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-python"></i>
-                        </div>
-                         <h3>Python</h3>
-                    </div>
+  <footer>
+    © 2026 Eugene Henri Apostol
+  </footer>
+</div>
 
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-java"></i>
-                        </div>
-                         <h3>Java</h3>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-c"></i>
-                        </div>
-                         <h3>C</h3>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-database"></i>
-                        </div>
-                         <h3>MYSQL/SQL</h3>
-                    </div>
-                    
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-git"></i>
-                        </div>
-                         <h3>Git</h3>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-angular"></i>
-                        </div>
-                         <h3>Angular</h3>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-laravel"></i>
-                        </div>
-                         <h3>Laravel</h3>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fa-brands fa-python"></i>
-                        </div>
-                         <h3>Django</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact section">
-            <div class="container">
-                <h2 class="section-title">Contact Me</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <p>I'm currently seeking for employment. However, 
-                            if you have other requests or questions, don't hesitate to contact me.</p>
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <i class="fa-solid fa-envelope"></i>
-                                <span>eugenehenriapostol@gmail.com</span>
-                            </div>
-                            <div class="contact-method">
-                                <i class="fa-brands fa-linkedin"></i>
-                                <a href="https://www.linkedin.com/in/eugene-henri-apostol/" target="_blank" rel="noopener noreferrer">linkedin.com/in/eugene-henri-apostol</a>
-                            </div>
-                            <div class="contact-method">
-                                <i class="fa-brands fa-github"></i>
-                                <a href="https://github.com/EugeneHenriApostol">github.com/EugeneHenriApostol</a>
-                            </div>
-                        </div>
-                    </div>
-        </section>
-
-        <footer>
-
-        </footer>
-    </main>
-    <script src="script.js"></script>
 </body>
 </html>
